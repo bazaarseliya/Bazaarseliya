@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Product — Buy Now</title>
+    <style>
+        :root {
+            --accent: #0d6efd;
+            --card: #ffffff;
+            --muted: #6b7280
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, 'Helvetica Neue', Arial;
+            margin: 0;
+            background: #f3f4f6;
+            color: #111
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 28px auto;
+            padding: 20px
+        }
+
+        /* Top bar with back arrow */
+        .topbar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background: var(--card);
+            border-radius: 10px;
+            box-shadow: 0 6px 20px rgba(13, 110, 253, 0.06);
+            cursor: pointer;
+            border: 1px solid rgba(15, 23, 42, 0.04)
+        }
+
+        .back-btn svg {
+            width: 18px;
+            height: 18px
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px
+        }
+
+        @media (max-width:880px) {
+            .grid {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: 14px;
+            padding: 18px;
+            box-shadow: 0 6px 20px rgba(2, 6, 23, 0.06);
+            border: 1px solid rgba(15, 23, 42, 0.04)
+        }
+
+        .gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 12px
+        }
+
+        .main-img {
+            width: 100%;
+            height: 420px;
+            border-radius: 12px;
+            background-size: cover;
+            background-position: center
+        }
+
+        @media (max-width:520px) {
+            .main-img {
+                height: 280px
+            }
+        }
+
+        .thumbs {
+            display: flex;
+            gap: 8px
+        }
+
+        .thumb {
+            width: 64px;
+            height: 64px;
+            border-radius: 8px;
+            background-size: cover;
+            background-position: center;
+            cursor: pointer;
+            border: 2px solid transparent
+        }
+
+        .thumb.active {
+            border-color: var(--accent)
+        }
+
+        .meta h1 {
+            margin: 0 0 6px;
+            font-size: 22px
+        }
+
+        .meta .price {
+            font-weight: 700;
+            font-size: 20px;
+            color: var(--accent)
+        }
+
+        .meta .muted {
+            color: var(--muted);
+            font-size: 14px;
+            margin-top: 6px
+        }
+
+        .selectors {
+            display: flex;
+            gap: 12px;
+            margin-top: 12px;
+            flex-wrap: wrap
+        }
+
+        select,
+        input[type=number] {
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid #e6e9ee;
+            background: #fff
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 18px
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600
+        }
+
+        .btn.primary {
+            background: linear-gradient(90deg, var(--accent), #0056d6);
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(13, 110, 253, 0.18)
+        }
+
+        .btn.ghost {
+            background: transparent;
+            border: 1px solid rgba(15, 23, 42, 0.06)
+        }
+
+        .specs {
+            margin-top: 14px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px
+        }
+
+        @media (max-width:480px) {
+            .specs {
+                grid-template-columns: repeat(1, 1fr)
+            }
+        }
+
+        .spec {
+            font-size: 14px;
+            color: var(--muted);
+            padding: 10px;
+            background: #fbfbfd;
+            border-radius: 8px
+        }
+
+        /* Modal */
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(2, 6, 23, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 40
+        }
+
+        .modal {
+            background: var(--card);
+            width: 100%;
+            max-width: 720px;
+            border-radius: 12px;
+            padding: 18px;
+            box-shadow: 0 20px 50px rgba(2, 6, 23, 0.4)
+        }
+
+        .modal h3 {
+            margin: 0 0 8px
+        }
+
+        .form-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 10px
+        }
+
+        .form-row .col {
+            flex: 1
+        }
+
+        input[type=text],
+        input[type=email],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #e6e9ee
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical
+        }
+
+        .close-x {
+            background: transparent;
+            border: 0;
+            font-size: 18px;
+            cursor: pointer
+        }
+
+        /* small helpers */
+        .price-old {
+            text-decoration: line-through;
+            color: #9ca3af;
+            margin-left: 8px;
+            font-weight: 500
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 8px;
+            border-radius: 999px;
+            background: #eef2ff;
+            color: #3730a3;
+            font-weight: 600;
+            font-size: 12px
+        }
+
+        footer.note {
+            margin-top: 18px;
+            color: var(--muted);
+            font-size: 13px
+        }
+
+        .main-img-box {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .main-img {
+            width: 100%;
+            height: auto;
+            /* height auto adjust */
+            display: block;
+            object-fit: contain;
+            /* crop nahi hona */
+            border-radius: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="topbar">
+            <button class="back-btn" id="backBtn" title="Back">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M15 18l-6-6 6-6" stroke="#0b1724" stroke-width="2.2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+                <span>Back</span>
+            </button>
+            <div style="margin-left:8px; color:var(--muted)">Product Details</div>
+        </div>
+
+        <div class="grid">
+            <div class="card gallery">
+                <div class="main-img-box">
+                    <img id="mainImage"
+                        src="https://images.meesho.com/images/products/369274474/d1lv2_512.avif?width=512"
+                        class="main-img" />
+                </div>
+
+                <div class="thumbs" id="thumbs">
+                    <div class="thumb active"
+                        data-src="https://images.meesho.com/images/products/369274474/d1lv2_512.avif?width=512"></div>
+                    <div class="thumb" data-src="assets\products\woodies.avif"
+                        style="background-image:url('https://images.meesho.com/images/products/369274474/d1lv2_512.avif?width=512')">
+                    </div>
+                    <div class="thumb"
+                        data-src="https://images.unsplash.com/photo-1563298723-dcfebaa392e3?auto=format&fit=crop&w=1200&q=60"
+                        style="background-image:url('https://images.unsplash.com/photo-1563298723-dcfebaa392e3?auto=format&fit=crop&w=400&q=60')">
+                    </div>
+                    <div class="thumb"
+                        data-src="https://images.unsplash.com/photo-1580913428731-6b078e3d2c10?auto=format&fit=crop&w=1200&q=60"
+                        style="background-image:url('https://images.unsplash.com/photo-1580913428731-6b078e3d2c10?auto=format&fit=crop&w=400&q=60')">
+                    </div>
+                </div>
+            </div>
+
+            <div class="card meta">
+                <h1 id="productTitle">Stylish Wireless Headphones</h1>
+                <div style="display:flex;align-items:center;gap:8px;margin-top:8px">
+                    <div class="price">₹2,499</div>
+                    <div class="price-old">₹3,499</div>
+                    <div class="badge">20% OFF</div>
+                </div>
+                <div class="muted">In stock • Free shipping over ₹999</div>
+
+                <div class="selectors">
+                    <div>
+                        <label for="size">Size</label><br>
+                        <div class="size-group" style="display:flex;gap:10px;margin-top:6px">
+                            <div class="size-btn" data-size="S"
+                                style="padding:8px 14px;border:2px solid #ccc;border-radius:8px;cursor:pointer;font-weight:600">
+                                S</div>
+                            <div class="size-btn active" data-size="M"
+                                style="padding:8px 14px;border:2px solid var(--accent);border-radius:8px;cursor:pointer;font-weight:600">
+                                M</div>
+                            <div class="size-btn" data-size="L"
+                                style="padding:8px 14px;border:2px solid #ccc;border-radius:8px;cursor:pointer;font-weight:600">
+                                L</div>
+                            <div class="size-btn" data-size="XL"
+                                style="padding:8px 14px;border:2px solid #ccc;border-radius:8px;cursor:pointer;font-weight:600">
+                                XL</div>
+                        </div>
+                        <input type="hidden" id="size" value="M">
+                    </div>
+
+                    <div>
+                        <label>Color</label><br>
+                        <div style="display:flex;gap:10px;align-items:center;margin-top:4px">
+                            <div class="color-swatch" data-color="black"
+                                style="width:32px;height:32px;border-radius:50%;background:black;cursor:pointer;border:3px solid transparent">
+                            </div>
+                            <div class="color-swatch" data-color="white"
+                                style="width:32px;height:32px;border-radius:50%;background:white;cursor:pointer;border:3px solid #ccc">
+                            </div>
+                            <div class="color-swatch" data-color="blue"
+                                style="width:32px;height:32px;border-radius:50%;background:blue;cursor:pointer;border:3px solid transparent">
+                            </div>
+                        </div>
+                        <input type="hidden" id="color" value="black" />
+                    </div>
+
+                    <div>
+                        <label for="qty">Qty</label><br>
+                        <input id="qty" type="number" min="1" value="1" />
+                    </div>
+                </div>
+
+                <div class="actions">
+                    <button class="btn primary" id="buyNow"
+                        style="width:100%; padding:14px 20px; text-align:center; justify-content:center">Buy
+                        Now</button>
+
+                </div>
+
+                <div class="specs">
+                    <div class="spec"><strong>Battery:</strong> Up to 24 hrs</div>
+                    <div class="spec"><strong>Connectivity:</strong> Bluetooth 5.2</div>
+                    <div class="spec"><strong>Warranty:</strong> 1 year</div>
+                    <div class="spec"><strong>Warranty:</strong> 1 year</div>
+                </div>
+
+                <footer class="note">Delivery dates are estimates. Replace the form API key to receive order emails.
+                </footer>
+            </div>
+        </div>
+
+        <!-- Modal order form -->
+        <div id="modalBackdrop" class="modal-backdrop" role="dialog" aria-hidden="true">
+            <div class="modal" role="document">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+                    <h3>Place your order</h3>
+                    <button class="close-x" id="closeModal" aria-label="Close">✕</button>
+                </div>
+
+                <!-- Web3Forms integration -- replace API_KEY with your key -->
+                <form id="orderForm" method="POST" action="https://api.web3forms.com/submit">
+                    <!-- Required: replace the api_key value with your Web3Forms API key -->
+                    <input type="hidden" name="access_key" value="3cca3ba5-9268-481f-9488-a2b5fc06f64b" />
+                    <input type="hidden" name="subject" value="New order from Bazaarseliya" />
+                    <input type="hidden" name="redirect" value="https://web3forms.com/success" />
+
+                    <div class="form-row">
+                        <div class="col">
+                            <label for="name">Full name</label>
+                            <input id="name" name="name" type="text" required placeholder="Your name" />
+                        </div>
+                        <div class="col">
+                            <label for="email">Email</label>
+                            <input id="email" name="email" type="email" required placeholder="you@example.com" />
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col">
+                            <label for="phone">Phone</label>
+                            <input id="phone" name="phone" type="text" placeholder="Mobile number" />
+                        </div>
+                        <div class="col">
+                            <label for="address">Address</label>
+                            <input id="address" name="address" type="text" placeholder="Shipping address" />
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom:10px">
+                        <label for="message">Order details</label>
+                        <textarea id="message" name="message" placeholder="Any notes or customization"></textarea>
+                    </div>
+
+                    <!-- Hidden fields we will populate from page -->
+                    <input type="hidden" name="product_title" id="f_product_title" />
+                    <input type="hidden" name="product_price" id="f_product_price" />
+                    <input type="hidden" name="product_size" id="f_product_size" />
+                    <input type="hidden" name="product_color" id="f_product_color" />
+                    <input type="hidden" name="product_qty" id="f_product_qty" />
+
+                    <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px">
+                        <button type="button" class="btn ghost" id="cancelForm">Cancel</button>
+                        <button type="submit" class="btn primary">Send order</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Back button
+        document.getElementById('backBtn').addEventListener('click', () => {
+            if (window.history.length > 1) window.history.back(); else window.location.href = '/';
+        });
+
+        // Image gallery
+        document.querySelectorAll('.thumb').forEach(t => {
+            t.addEventListener('click', () => {
+                document.querySelectorAll('.thumb').forEach(x => x.classList.remove('active'));
+                t.classList.add('active');
+
+                document.getElementById('mainImage').src = t.dataset.src;
+            });
+        });
+
+
+        // Modal handling
+        const modal = document.getElementById('modalBackdrop');
+        const buyNow = document.getElementById('buyNow');
+        const closeModal = document.getElementById('closeModal');
+        const cancelForm = document.getElementById('cancelForm');
+        const orderForm = document.getElementById('orderForm');
+
+        function openModal() {
+            // populate hidden inputs
+            document.getElementById('f_product_title').value = document.getElementById('productTitle').innerText;
+            document.getElementById('f_product_price').value = document.querySelector('.price').innerText;
+            document.getElementById('f_product_size').value = document.getElementById('size').value;
+            document.getElementById('f_product_color').value = document.getElementById('color').value;
+            document.getElementById('f_product_qty').value = document.getElementById('qty').value;
+
+            modal.style.display = 'flex';
+            modal.setAttribute('aria-hidden', 'false');
+        }
+        function closeModalFn() {
+            modal.style.display = 'none';
+            modal.setAttribute('aria-hidden', 'true');
+        }
+
+        buyNow.addEventListener('click', openModal);
+        closeModal.addEventListener('click', closeModalFn);
+        cancelForm.addEventListener('click', closeModalFn);
+
+        // Add to cart (simple localStorage example)
+        document.getElementById('addCart').addEventListener('click', () => {
+            const item = {
+                title: document.getElementById('productTitle').innerText,
+                price: document.querySelector('.price').innerText,
+                size: document.getElementById('size').value,
+                color: document.getElementById('color').value,
+                qty: Number(document.getElementById('qty').value)
+            };
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            cart.push(item);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert('Added to cart');
+        });
+
+        // Prevent form double-submit by disabling submit button after click
+        orderForm.addEventListener('submit', function (e) {
+            const apiKey = orderForm.querySelector('input[name="3cca3ba5-9268-481f-9488-a2b5fc06f64b"]').value;
+            if (!apiKey || apiKey.includes('YOUR_')) {
+                e.preventDefault();
+                alert('Please replace the placeholder API key with your Web3Forms API key in the form (access_key).');
+                return;
+            }
+            // let the form submit to Web3Forms which will send you an email
+            // optionally you could use fetch() here and show a friendly UI
+        });
+
+        // close modal on ESC
+        window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModalFn(); });
+    </script>
+    <script>
+        // Color swatch selector with image change
+        const colorImages = {
+            black: "https://images.unsplash.com/photo-1526178614323-1c2d3d0d06d6?auto=format&fit=crop&w=1200&q=60",
+            white: "https://images.unsplash.com/photo-1600180758896-8f9c7f45f0b3?auto=format&fit=crop&w=1200&q=60",
+            blue: "https://images.unsplash.com/photo-1563298723-dcfebaa392e3?auto=format&fit=crop&w=1200&q=60"
+        };
+
+        document.querySelectorAll('.color-swatch').forEach(sw => {
+            sw.addEventListener('click', () => {
+                document.querySelectorAll('.color-swatch').forEach(s => s.style.borderColor = 'transparent');
+                sw.style.borderColor = '#0d6efd';
+                const color = sw.dataset.color;
+
+                document.getElementById('color').value = color;
+
+                // Update main image
+               document.getElementById('mainImage').src = colorImages[color];
+
+
+                // Update primary thumbnail
+                const firstThumb = document.querySelector('.thumb');
+                if (firstThumb) {
+                    firstThumb.dataset.src = colorImages[color];
+                    firstThumb.style.backgroundImage = `url('${colorImages[color]}')`;
+                    document.querySelectorAll('.thumb').forEach(x => x.classList.remove('active'));
+                    firstThumb.classList.add('active');
+                }
+            });
+        });
+    </script>
+    <script>
+        // Size selector
+        document.querySelectorAll('.size-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.size-btn').forEach(b => {
+                    b.classList.remove('active');
+                    b.style.borderColor = '#ccc';
+                });
+                btn.classList.add('active');
+                btn.style.borderColor = 'var(--accent)';
+                document.getElementById('size').value = btn.dataset.size;
+            });
+        });
+    </script>
+</body>
+
+
+</html>

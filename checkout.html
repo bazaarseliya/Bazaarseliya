@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   
+<meta name="theme-color" content="#0d6efd">
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f8f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .checkout-container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 12px;
+            padding: 25px 35px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .cart-item img {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            margin-right: 10px;
+        }
+
+        .item-info {
+            flex: 1;
+        }
+
+        .item-info p {
+            margin: 0;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .item-info span {
+            font-size: 13px;
+            color: #555;
+        }
+
+        .item-price {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .cart-total {
+            text-align: right;
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .section-title {
+            margin-top: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 8px;
+        }
+
+        form {
+            margin-top: 15px;
+         margin-right: 26px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            outline: none;
+            transition: border 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        select:focus {
+            border-color: #28a745;
+        }
+
+        .half {
+            flex: 1 1 calc(50% - 10px);
+        }
+
+        .checkout-btn {
+            display: block;
+            width: 100%;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-top: 25px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .checkout-btn:hover {
+            background-color: #218838;
+        }
+
+        .empty-cart {
+            text-align: center;
+            color: #666;
+            padding: 30px 0;
+        }
+
+        .payment-method {
+            margin-top: 10px;
+        }
+
+        .payment-method label {
+            display: block;
+            margin: 5px 0;
+        }
+    </style>
+    <style>
+/* Form Inputs */
+.form-group input,
+.form-group textarea,
+select {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: all 0.3s ease;
+    background-color: #fafafa;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+    font-family: Arial, sans-serif;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+select:focus {
+    border-color: #28a745;
+    background-color: #fff;
+    box-shadow: 0 0 8px rgba(40,167,69,0.3);
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.half {
+    flex: 1 1 calc(50% - 10px);
+}
+
+/* Smooth hover effect on form fields */
+.form-group input:hover,
+.form-group textarea:hover,
+select:hover {
+    border-color: #28a745;
+    box-shadow: 0 0 5px rgba(40,167,69,0.15);
+}
+
+/* Checkout button */
+.checkout-btn {
+    display: block;
+    width: 100%;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 16px;
+    border-radius: 10px;
+    font-size: 17px;
+    font-weight: 600;
+    margin-top: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.checkout-btn:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+/* Section Titles */
+.section-title {
+    margin-top: 30px;
+    font-size: 18px;
+    font-weight: 600;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 8px;
+    color: #333;
+}
+
+/* Payment labels */
+.payment-method label {
+    display: block;
+    margin: 8px 0;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.payment-method input[type="radio"] {
+    margin-right: 8px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .form-group {
+        flex-direction: column;
+    }
+    
+    .half {
+        flex: 1 1 100%;
+    }
+}
+</style>
+<style>
+/* Hover glow on total */
+.cart-total:hover {
+    color: #28a745;
+    text-shadow: 0 0 10px rgba(40,167,69,0.5);
+    transition: all 0.4s ease;
+}
+
+/* Floating animation on checkout button */
+.checkout-btn {
+    animation: floatBtn 3s ease-in-out infinite;
+}
+
+@keyframes floatBtn {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+}
+
+/* Staggered fade-in for cart items (already included before) */
+.cart-item {
+    animation: slideUp 0.6s forwards;
+}
+
+/* Count-up animation keyframes (not needed; handled in JS) */
+</style>
+
+</head>
+
+<body>
+
+    <div class="checkout-container">
+        <h2>Checkout</h2>
+
+        <!-- Cart Summary -->
+        <div id="checkout-items"></div>
+        <div class="cart-total" id="checkout-total">Total: Rs. 0.00</div>
+
+        <!-- Address Form -->
+        <div class="section-title">Shipping Details</div>
+        <form id="checkout-form" >
+            <div class="form-group">
+                <input type="text" id="name" placeholder="Full Name" required>
+                <input type="tel" id="phone" placeholder="Phone Number" required>
+            </div>
+
+            <div class="form-group">
+                <textarea id="address" placeholder="Full Address" rows="3" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <div class="half">
+                    <input type="text" id="city" placeholder="City" required>
+                </div>
+                <div class="half">
+                    <input type="text" id="zip" placeholder="Zip / Postal Code" required>
+                </div>
+            </div>
+
+            <!-- Payment -->
+            <div class="section-title">Payment Method</div>
+            <div class="payment-method">
+                <label><input type="radio" name="payment" value="cod" checked> Cash on Delivery (COD)</label>
+                <label><input type="radio" name="payment" value="online"> Online Payment</label>
+            </div>
+
+            <button type="submit" class="checkout-btn">Place Order</button>
+        </form>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const checkoutItems = document.getElementById('checkout-items');
+  const checkoutTotal = document.getElementById('checkout-total');
+  const form = document.getElementById('checkout-form');
+
+  const cartData = JSON.parse(localStorage.getItem('cartItems')) || [];
+  const total = parseFloat(localStorage.getItem('cartTotal')) || 0;
+
+  if (cartData.length === 0) {
+    checkoutItems.innerHTML = '<p class="empty-cart">Your cart is empty 😔</p>';
+    form.style.display = 'none';
+    return;
+  }
+
+  cartData.forEach(item => {
+    const itemPrice = parseFloat(item.price.replace(/[^\d.]/g, '')) || 0;
+    const div = document.createElement('div');
+    div.className = 'cart-item';
+    div.innerHTML = `
+      <img src="${item.img}" alt="">
+      <div class="item-info">
+        <p>${item.title}</p>
+        <span>${item.price}</span>
+      </div>
+      <div class="item-price">Rs. ${itemPrice.toFixed(2)}</div>
+    `;
+    checkoutItems.appendChild(div);
+  });
+
+  checkoutTotal.textContent = 'Total: Rs. ' + total.toFixed(2);
+
+  // ✅ Prefill customer details if saved
+  const savedCustomer = JSON.parse(localStorage.getItem('customerDetails'));
+  if (savedCustomer) {
+    document.getElementById('name').value = savedCustomer.name || '';
+    document.getElementById('phone').value = savedCustomer.phone || '';
+    document.getElementById('address').value = savedCustomer.address || '';
+    document.getElementById('city').value = savedCustomer.city || '';
+    document.getElementById('zip').value = savedCustomer.zip || '';
+    if (savedCustomer.payment) {
+      const paymentRadio = document.querySelector(`input[name="payment"][value="${savedCustomer.payment}"]`);
+      if (paymentRadio) paymentRadio.checked = true;
+    }
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const address = document.getElementById('address').value.trim();
+    const city = document.getElementById('city').value.trim();
+    const zip = document.getElementById('zip').value.trim();
+    const payment = document.querySelector('input[name="payment"]:checked').value;
+
+    if (!name || !phone || !address || !city || !zip) {
+      alert("⚠️ Please fill all details!");
+      return;
+    }
+
+    // ✅ Save customer details for future visits
+    localStorage.setItem('customerDetails', JSON.stringify({name, phone, address, city, zip, payment}));
+
+    const order = {
+      id: 'ORD' + Math.floor(Math.random() * 100000),
+      name, phone, address, city, zip, payment,
+      date: new Date().toLocaleString(),
+      status: 'Pending',
+      items: cartData,
+      total
+    };
+
+    sendOrderToEmail(order);
+
+    const allOrders = JSON.parse(localStorage.getItem('allOrders')) || [];
+    allOrders.push(order);
+    localStorage.setItem('allOrders', JSON.stringify(allOrders));
+
+    alert(`🎉 Thank you ${name}! Your order has been placed successfully.`);
+    localStorage.removeItem('cartItems');
+    localStorage.removeItem('cartTotal');
+    localStorage.removeItem('cartCount');
+    window.location.href = "order-success.html";
+  });
+});
+
+function sendOrderToEmail(order) {
+  const formData = new FormData();
+  formData.append("access_key", "3cca3ba5-9268-481f-9488-a2b5fc06f64b");
+  formData.append("subject", `🛍️ New Order from ${order.name}`);
+  formData.append("from_name", "Order By WhiteArc");
+
+  const message = `
+🧾 New Order Received
+
+Order ID: ${order.id}
+Name: ${order.name}
+Phone: ${order.phone}
+Address: ${order.address}, ${order.city} - ${order.zip}
+Payment Method: ${order.payment}
+Total: Rs. ${order.total.toFixed(2)}
+Date: ${order.date}
+
+🛒 Ordered Items:
+${order.items.map((i, idx) => 
+  `${idx + 1}. ${i.title} - ${i.price}`
+).join('\n')}
+`;
+
+  formData.append("message", message);
+
+  fetch("https://api.web3forms.com/submit", {
+    method: "POST",
+    body: formData
+  })
+  .then(res => res.json())
+  .then(result => {
+    if (result.success) console.log("✅ Email sent successfully");
+    else console.error("❌ Failed to send email:", result);
+  })
+  .catch(err => console.error("Error:", err));
+}
+
+
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const checkoutData = JSON.parse(localStorage.getItem("checkoutProduct"));
+  if (checkoutData) {
+    document.querySelector("#checkout-name").innerText = checkoutData.name;
+    document.querySelector("#checkout-price").innerText = checkoutData.price;
+    document.querySelector("#checkout-image").src = checkoutData.image;
+  }
+});
+</script>
+
+
+
+
+</body>
+
+
+</html>

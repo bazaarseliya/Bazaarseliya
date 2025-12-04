@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Summer Collection</title>
+  <link rel="stylesheet" href="summer.css">
+</head>
+<body>
+    <header>
+        <!-- Hamburger Menu -->
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <div class="logo">
+            <h4>.Bazaarseliya</h4>
+        </div>
+
+        <nav id="menu">
+            <div class="dropdown">
+                <a href="#">Collections ▾</a>
+                <div class="dropdown-content">
+                    <a href="#">New Arrivals</a>
+                    <a href="#">Trending</a>
+                    <a href="#">Best Sellers</a>
+                </div>
+            </div>
+            
+            <a href="#" id="winter-btn">❄️ Winters</a>
+             <script>
+    document.getElementById("winter-btn").addEventListener("click", () => {
+      document.body.classList.add("fade-out");
+      setTimeout(() => {
+        window.location.href = "winter.html";
+      }, 700);
+    });
+  </script>
+            <a href="#"  id="summer-btn">🌞 Summer</a>
+            <script>
+  document.getElementById("summer-btn").addEventListener("click", () => {
+    document.body.classList.add("fade-out");
+    setTimeout(() => {
+      window.location.href = "summer.html";
+    }, 700);
+  });
+</script>
+
+            <a href="track-orders.html">Track Your Order</a>
+            <a href="contact-us.html">Contact Us</a>
+        </nav>
+        <div class="icons">
+            <!-- Search Icon -->
+            <div class="search-icon" onclick="openSearch()">
+                <svg width="18" height="19" viewBox="0 0 18 19" fill="none">
+                    <path
+                        d="M7.96875 15.6875C11.9556 15.6875 15.1875 12.4556 15.1875 8.4688C15.1875 4.48194 11.9556 1.25 7.96875 1.25C3.98194 1.25 0.75 4.48194 0.75 8.4688C0.75 12.4556 3.98194 15.6875 7.96875 15.6875Z"
+                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M13.0732 13.5742L17.2497 17.7508" stroke="currentColor" stroke-width="1.5"
+                        stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+            </div>
+            <!-- User Icon -->
+            <div class="user-icon">
+                <svg width="24" height="24" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    id="svgkp">
+                    <path
+                        d="M22.9129 12.935L13.7571 23.0474C13.5348 23.2929 13.1284 23.1084 13.1669 22.7794L14.0816 14.9731H10.6991C10.4034 14.9731 10.2484 14.6219 10.4478 14.4035L20.3133 3.59739C20.5589 3.32834 20.9984 3.58134 20.8891 3.92887L18.2354 12.3664H22.6607C22.9557 12.3664 23.1109 12.7163 22.9129 12.935Z"
+                        fill="#FEA203"></path>
+                    <path id="svgkp-path" fill-rule="evenodd" clip-rule="evenodd"
+                        d="M16.6079 5.35819C16.4805 5.1933 16.3421 5.03582 16.1932 4.8869C15.2702 3.96387 14.0183 3.44531 12.7129 3.44531C11.4075 3.44531 10.1556 3.96387 9.2326 4.8869C8.30957 5.80993 7.79102 7.06183 7.79102 8.36719C7.79102 9.67255 8.30957 10.9244 9.2326 11.8475C9.48368 12.0986 9.75909 12.3197 10.0533 12.5086L11.0235 11.4503C10.7335 11.2914 10.4649 11.0911 10.227 10.8531C9.56766 10.1938 9.19727 9.29959 9.19727 8.36719C9.19727 7.43479 9.56766 6.54057 10.227 5.88127C10.8863 5.22196 11.7805 4.85156 12.7129 4.85156C13.6453 4.85156 14.5395 5.22196 15.1988 5.88127C15.3636 6.04604 15.5103 6.22549 15.6377 6.41654L16.6079 5.35819ZM20.6413 18.6497L19.6746 19.7132C20.1676 20.4122 20.4473 21.2264 20.4473 22.0781V23.8359C20.4473 24.2243 20.7621 24.5391 21.1504 24.5391C21.5387 24.5391 21.8535 24.2243 21.8535 23.8359V22.0781C21.8535 20.7863 21.4016 19.6103 20.6413 18.6497ZM12.3111 17.5078H10.3026C7.27113 17.5078 4.97852 19.6394 4.97852 22.0781V23.8359C4.97852 24.2243 4.66372 24.5391 4.27539 24.5391C3.88707 24.5391 3.57227 24.2243 3.57227 23.8359V22.0781C3.57227 18.6922 6.67684 16.1016 10.3026 16.1016H12.4885L12.3111 17.5078Z"
+                        fill="currentColor" stroke="currentColor"></path>
+                </svg>
+            </div>
+
+            <!-- Cart Icon with Badge -->
+            <div class="cart-icon" style="position: relative;">
+                <svg width="20" height="22" viewBox="0 0 17 19" fill="none" class="cart--icon">
+                    <path
+                        d="M13.8624 5.125H3.13686C2.21555 5.125 1.45202 5.83932 1.39074 6.75859L0.749072 16.3836C0.681732 17.3936 1.48288 18.25 2.49519 18.25H14.5041C15.5164 18.25 16.3176 17.3936 16.2502 16.3836L15.6086 6.75859C15.5472 5.83932 14.7837 5.125 13.8624 5.125Z"
+                        stroke="currentColor" stroke-width="1.5"></path>
+                    <path d="M12 7.75V4.25C12 2.317 10.433 0.75 8.5 0.75C6.567 0.75 5 2.317 5 4.25V7.75"
+                        stroke="currentColor" stroke-width="1.5" stroke-linecap="square"></path>
+                </svg>
+                <span class="cart-badge">0</span>
+            </div>
+
+            <!-- Dropdown for added products -->
+            <div class="cart-dropdown"
+                style="display:none; position:absolute; top:40px; right:0; background:#fff; border:1px solid #ddd; border-radius:8px; padding:10px; width:240px; z-index:999;">
+                <ul id="cart-items" style="list-style:none; margin:0; padding:0;"></ul>
+                <!-- Total Price Section -->
+                <div id="cart-total"
+                    style="border-top:1px solid #ddd; margin-top:8px; padding-top:5px; font-weight:bold;">
+                    Total: Rs. 0
+                </div>
+                <!-- Continue to Order Button -->
+                <button id="continue-order" class="continue-btn"
+                    style="width:100%; margin-top:10px; padding:8px; background:#28a745; color:white; border:none; border-radius:5px; cursor:pointer;">
+                    Continue to Order
+                </button>
+            </div>
+        </div>
+    </header>
+    <script>
+      // Apply theme class based on page
+if (window.location.href.includes("winter")) {
+  document.body.classList.add("winter-theme");
+} else if (window.location.href.includes("summer")) {
+  document.body.classList.add("summer-theme");
+}
+
+// Hamburger toggle
+const hamburger = document.getElementById("hamburger");
+const menu = document.getElementById("menu");
+hamburger.addEventListener("click", () => {
+  menu.classList.toggle("active");
+});
+
+    </script>
+  <div class="summer-container">
+    <h1>🌞 Summer Collection 🌴</h1>
+    <p>Cool looks for the hottest days!</p>
+    <a href="index.html" class="back-btn">← Back to Home</a>
+  </div>
+
+  <!-- 🩳 Product Section -->
+  <section class="products">
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=500" alt="Summer T-Shirt">
+      <h2>Summer Cotton T-Shirt</h2>
+      <p>₹799</p>
+      <div class="buttons">
+        <button class="btn">Buy Now</button>
+        <button class="btn outline">View Details</button>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1593032465171-8c18f5aa246d?w=500" alt="Sunglasses">
+      <h2>Stylish Sunglasses</h2>
+      <p>₹999</p>
+      <div class="buttons">
+        <button class="btn">Buy Now</button>
+        <button class="btn outline">View Details</button>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=500" alt="Beach Shorts">
+      <h2>Beach Shorts</h2>
+      <p>₹699</p>
+      <div class="buttons">
+        <button class="btn">Buy Now</button>
+        <button class="btn outline">View Details</button>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1581291519195-ef11498d1cfb?w=500" alt="Sun Hat">
+      <h2>Sun Hat</h2>
+      <p>₹499</p>
+      <div class="buttons">
+        <button class="btn">Buy Now</button>
+        <button class="btn outline">View Details</button>
+      </div>
+    </div>
+  </section>
+
+  <canvas id="sun"></canvas>
+
+  <script>
+    // ☀️ Sunshine particles animation
+    const canvas = document.getElementById('sun');
+    const ctx = canvas.getContext('2d');
+    canvas.width = innerWidth;
+    canvas.height = innerHeight;
+
+    let particles = [];
+    for (let i = 0; i < 100; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 4 + 2,
+        o: Math.random() * 0.6 + 0.4,
+        s: Math.random() * 0.5 + 0.3
+      });
+    }
+
+    function drawSunshine() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let p of particles) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 153, ${p.o})`;
+        ctx.fill();
+
+        p.y -= p.s;
+        if (p.y < 0) {
+          p.y = canvas.height + 10;
+          p.x = Math.random() * canvas.width;
+        }
+      }
+    }
+
+    setInterval(drawSunshine, 30);
+  </script>
+</body>
+</html>

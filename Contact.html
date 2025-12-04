@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ 
+<meta name="theme-color" content="#0d6efd">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Support - WhiteArc</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #f2f2f2, #dcdcdc);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      background: #fff;
+      padding: 35px 30px;
+      border-radius: 16px;
+      max-width: 520px;
+      width: 100%;
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .container:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #111;
+      font-weight: 600;
+      font-size: 1.8em;
+      letter-spacing: 0.5px;
+    }
+
+    label {
+      display: block;
+      margin-top: 14px;
+      font-weight: 500;
+      color: #222;
+    }
+
+    input,
+    select,
+    textarea,
+    button {
+      width: 100%;
+      padding: 11px 12px;
+      margin-top: 6px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 15px;
+      background: #fafafa;
+      transition: all 0.3s ease;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #000;
+      background: #fff;
+      outline: none;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+    }
+
+    button {
+      background: linear-gradient(135deg, #000, #444);
+      color: #fff;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 18px;
+    }
+
+    button:hover {
+      background: linear-gradient(135deg, #333, #000);
+      transform: scale(1.03);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .lang-toggle {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .lang-toggle button {
+      background: #f2f2f2;
+      border: 1px solid #ccc;
+      color: #333;
+      cursor: pointer;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    .lang-toggle button.active {
+      background: #000;
+      color: #fff;
+      border-color: #000;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    }
+
+    #responseMsg {
+      text-align: center;
+      margin-top: 12px;
+      font-weight: 600;
+      font-size: 0.95em;
+    }
+
+    .last-problem {
+      background: linear-gradient(135deg, #f5f5f5, #e6e6e6);
+      border-left: 5px solid #000;
+      padding: 12px 15px;
+      border-radius: 10px;
+      margin-bottom: 18px;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .last-problem p {
+      margin: 4px 0;
+      font-size: 14px;
+      color: #333;
+    }
+
+    @media(max-width:600px) {
+      .container {
+        padding: 25px 20px;
+      }
+
+      h2 {
+        font-size: 1.6em;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h2 id="title">Contact Support</h2>
+
+    <div class="lang-toggle">
+      <button id="enBtn" class="active">English</button>
+      <button id="hiBtn">हिंदी</button>
+    </div>
+
+    <a href="tickets.html" style="text-decoration: none;">
+      <div id="lastProblem" class="last-problem" style="display:none;">
+        <strong id="lastTitle">Your Last Problem:</strong>
+        <p id="lastIssue"></p>
+        <p id="lastSubIssue"></p>
+        <p id="lastMessage"></p>
+        <p id="lastTicket"></p>
+      </div>
+    </a>
+
+    <form id="contactForm">
+      <input type="hidden" name="access_key" value="3cca3ba5-9268-481f-9488-a2b5fc06f64b">
+      <input type="hidden" id="ticketId" name="ticket_id">
+
+      <label id="issueLabel">Select Your Issue:</label>
+      <select id="mainIssue" name="issue" required>
+        <option value="">-- Choose an Issue --</option>
+        <option value="Order">Order Related</option>
+        <option value="Refund">Refund Related</option>
+        <option value="Payment">Payment Related</option>
+        <option value="Account">Account / Login</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <div id="subIssueContainer" style="display:none;">
+        <label id="subIssueLabel">Please select specific issue:</label>
+        <select id="subIssue" name="sub_issue"></select>
+      </div>
+
+      <label id="orderIdLabel">Order ID (if any)</label>
+      <input type="text" name="order_id" placeholder="Enter your order ID (optional)">
+
+      <label id="nameLabel">Your Name</label>
+      <input type="text" name="name" placeholder="Enter your name" required>
+
+      <label id="phoneLabel">Phone Number</label>
+      <input type="tel" name="phone" placeholder="Enter your phone number" required pattern="[0-9]{10}"
+        title="Enter 10-digit number">
+
+      <label id="emailLabel">Email Address</label>
+      <input type="email" name="email" placeholder="Enter your email" required>
+
+      <label id="msgLabel">Message</label>
+      <textarea name="message" rows="4" placeholder="Write your message..." required></textarea>
+
+      <button type="submit" id="submitBtn">Send Message</button>
+    </form>
+
+    <p id="responseMsg"></p>
+  </div>
+
+  <script>
+    const form = document.getElementById("contactForm");
+    const responseMsg = document.getElementById("responseMsg");
+    const mainIssue = document.getElementById("mainIssue");
+    const subIssueContainer = document.getElementById("subIssueContainer");
+    const subIssueSelect = document.getElementById("subIssue");
+    const ticketField = document.getElementById("ticketId");
+
+    const subIssues = {
+      Order: ["Order not received", "Wrong item delivered", "Order delayed"],
+      Refund: ["Refund not processed", "Partial refund issue", "Refund status not updated"],
+      Payment: ["Payment failed", "Double charged", "Payment pending confirmation"],
+      Account: ["Cannot login", "Password reset issue", "Account locked"],
+      Other: ["General query", "Suggestion", "Complaint"]
+    };
+
+    mainIssue.addEventListener("change", () => {
+      const selected = mainIssue.value;
+      if (subIssues[selected]) {
+        subIssueSelect.innerHTML = "";
+        subIssues[selected].forEach(opt => {
+          const option = document.createElement("option");
+          option.textContent = opt;
+          subIssueSelect.appendChild(option);
+        });
+        subIssueContainer.style.display = "block";
+      } else {
+        subIssueContainer.style.display = "none";
+      }
+    });
+
+    function generateTicketID() {
+      const randomNum = Math.floor(10000 + Math.random() * 90000);
+      return `SUP${randomNum}`;
+    }
+
+    function saveTicketLocally(data) {
+      localStorage.setItem("lastTicket", JSON.stringify(data));
+    }
+
+    function showLastProblem() {
+      const last = localStorage.getItem("lastTicket");
+      if (last) {
+        const info = JSON.parse(last);
+        document.getElementById("lastProblem").style.display = "block";
+        document.getElementById("lastIssue").textContent = "Issue: " + info.issue;
+        document.getElementById("lastSubIssue").textContent = "Sub Issue: " + (info.sub_issue || "N/A");
+        document.getElementById("lastMessage").textContent = "Message: " + info.message;
+        document.getElementById("lastTicket").textContent = "Ticket ID: #" + info.ticket_id;
+      }
+    }
+
+    showLastProblem();
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const ticketID = generateTicketID();
+      ticketField.value = ticketID;
+
+      const formData = new FormData(form);
+      formData.append("subject", `Support Request #${ticketID}`);
+
+      responseMsg.textContent = `Sending... (Ticket ID: #${ticketID})`;
+      responseMsg.style.color = "#333";
+
+      try {
+        const res = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          body: formData
+        });
+        const data = await res.json();
+
+        if (data.success) {
+          responseMsg.style.color = "green";
+          responseMsg.textContent = `✅ Message sent successfully! Your Ticket ID: #${ticketID}`;
+
+          const saved = {
+            issue: formData.get("issue"),
+            sub_issue: formData.get("sub_issue"),
+            message: formData.get("message"),
+            ticket_id: ticketID
+          };
+          saveTicketLocally(saved);
+          showLastProblem();
+
+          form.reset();
+          subIssueContainer.style.display = "none";
+        } else {
+          responseMsg.style.color = "red";
+          responseMsg.textContent = "❌ " + data.message;
+        }
+      } catch {
+        responseMsg.style.color = "red";
+        responseMsg.textContent = "❌ Network Error. Please try again.";
+      }
+    });
+
+    const enBtn = document.getElementById('enBtn');
+    const hiBtn = document.getElementById('hiBtn');
+    const labels = {
+      en: { title: "Contact Support", issue: "Select Your Issue:", subIssue: "Please select specific issue:", orderId: "Order ID (if any)", name: "Your Name", phone: "Phone Number", email: "Email Address", msg: "Message", submit: "Send Message", last: "Your Last Problem:" },
+      hi: { title: "सपोर्ट से संपर्क करें", issue: "अपनी समस्या चुनें:", subIssue: "कृपया विशिष्ट समस्या चुनें:", orderId: "ऑर्डर आईडी (यदि हो)", name: "आपका नाम", phone: "फ़ोन नंबर", email: "ईमेल पता", msg: "संदेश", submit: "संदेश भेजें", last: "आपकी पिछली समस्या:" }
+    };
+    enBtn.onclick = () => switchLang("en");
+    hiBtn.onclick = () => switchLang("hi");
+
+    function switchLang(lang) {
+      document.getElementById('title').textContent = labels[lang].title;
+      document.getElementById('issueLabel').textContent = labels[lang].issue;
+      document.getElementById('subIssueLabel').textContent = labels[lang].subIssue;
+      document.getElementById('orderIdLabel').textContent = labels[lang].orderId;
+      document.getElementById('nameLabel').textContent = labels[lang].name;
+      document.getElementById('phoneLabel').textContent = labels[lang].phone;
+      document.getElementById('emailLabel').textContent = labels[lang].email;
+      document.getElementById('msgLabel').textContent = labels[lang].msg;
+      document.getElementById('submitBtn').textContent = labels[lang].submit;
+      document.getElementById('lastTitle').textContent = labels[lang].last;
+      enBtn.classList.toggle('active', lang === 'en');
+      hiBtn.classList.toggle('active', lang === 'hi');
+    }
+  </script>
+</body>
+</html>
+

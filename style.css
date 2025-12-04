@@ -1,0 +1,382 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+
+
+/* Header */
+/* === Announcement Bar === */
+.announcement-bar {
+    width: 100%;
+    margin-bottom: 10px;
+    color: #afa9a9;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 12.5px 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.announcement-message {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: all 0.5s ease-in-out;
+}
+
+.announcement-message.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.announcement-message.exit {
+    opacity: 0;
+    transform: translateY(-100%);
+}
+
+.red1 {}
+
+/* Floating WhatsApp Button - Left Side */
+.whatsapp-float {
+    position: fixed;
+    width: 70px;
+    height: 70px;
+    bottom: 50px;
+    left: 20px;
+    /* Right ko left me change kiya */
+    background-color: #25D366;
+    color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.whatsapp-float img {
+    width: 45px;
+    height: 45px;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+}
+/* Body */
+body {
+    line-height: 1.6;
+    background-color: #fff;
+}
+
+
+header {
+    width: 100%;
+    background: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 50px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+
+
+/* Navigation */
+nav {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #000;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #25D366;
+}
+
+/* Dropdown */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 30px;
+    left: 0;
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    min-width: 160px;
+    z-index: 100;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 10px;
+    color: #000;
+    font-size: 14px;
+}
+
+.dropdown-content a:hover {
+    background: #f3f3f3;
+    color: #25D366;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Icons */
+.icons {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    font-size: 22px;
+    cursor: pointer;
+    color: #000;
+}
+
+.icons i:hover {
+    color: #25D366;
+}
+
+/* Hamburger */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 4px;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background: #000;
+    transition: 0.3s;
+}
+
+
+/* Responsive */
+@media(max-width: 300px) {
+    header {
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px;
+    }
+
+   
+    nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+    
+}
+/* Mobile Menu */
+@media(max-width: 900px) {
+    nav {
+        display: none;
+        flex-direction: column;
+        background: #fff;
+        width: 100%;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        padding: 20px 0;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+  
+.user-icon {
+        display:none;
+    }
+ .logo h4{
+       
+       margin-left: 20%;
+    }
+
+    nav.active {
+        display: flex;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    header {
+        padding: 12px 20px;
+    }
+    
+  
+}
+
+
+.section-title {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: -1px;
+    padding: 60px 20px 30px;
+    color: #000;
+}
+
+/* Optional underline or animation */
+.section-title span {
+    display: inline-block;
+    position: relative;
+}
+
+.section-title span::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -10px;
+    width: 50px;
+    height: 3px;
+    background: #000;
+    transform: translateX(-50%);
+}
+
+@media(max-width:768px) {
+    .section-title {
+        font-size: 2.2rem;
+        padding: 40px 10px 20px;
+    }
+     .product-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding: 10px;
+    margin-right: 15px;
+  }
+
+  .product-card {
+    width: 100%;
+    border-radius: 10px;
+    text-align: center;
+    margin-right: 15px;
+    
+  }
+
+  .product-card img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .product-card h3 {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 8px 0 4px;
+    
+  }
+
+  .product-card p {
+    font-size: 13px;
+    color: #555;
+  }
+}
+
+.product-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    justify-content: center;
+}
+
+.product-card {
+    position: relative; /* for icon position */
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    transition: 0.3s;
+    background: #fff;
+    margin-left: 10px;
+    overflow: hidden;
+}
+
+.product-card:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transform: translateY(-4px);
+}
+
+.product-container .outofstock:hover {
+    box-shadow: 0 4px 15px rgb(252, 5, 5);
+    transform: translateY(-4px);
+}
+
+.product-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.product-card h3 {
+    font-size: 14px;
+    color: #111;
+    margin-bottom: 8px;
+}
+
+.product-card p {
+    font-size: 14px;
+    margin: 0;
+}
+
+.price {
+    font-weight: bold;
+    color: #000;
+}
+
+.old-price {
+    color: #999;
+    text-decoration: line-through;
+    margin-left: 5px;
+}
+
+/* 🛒 Add to Cart Icon */
+.product-cart-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #5bda35;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    z-index: 10;
+}
+
+.product-cart-icon:hover {
+    background: #ff9900;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: #fff;
+}

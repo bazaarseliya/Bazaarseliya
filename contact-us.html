@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ 
+<meta name="theme-color" content="#0d6efd">
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us - Bazaarseliya</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: #f3f3f3;
+      color: #222;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: linear-gradient(135deg, #2c2c2c, #000);
+      color: #fff;
+      text-align: center;
+      padding: 60px 20px 50px;
+      border-bottom-left-radius: 40px;
+      border-bottom-right-radius: 40px;
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25);
+    }
+
+    header h1 {
+      font-size: 2.2em;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      font-size: 1em;
+      opacity: 0.9;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1100px;
+      margin: 30px auto 80px;
+    }
+
+    .team-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+      margin-top: 40px;
+    }
+
+    .team-card {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      padding: 25px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .team-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .team-card img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #000;
+      margin-bottom: 10px;
+    }
+
+    .team-card h3 {
+      color: #000;
+      font-size: 1.2em;
+      margin-bottom: 5px;
+    }
+
+    .team-card p {
+      font-size: 0.95em;
+      color: #555;
+    }
+
+    .info-section {
+      text-align: center;
+      margin-top: 60px;
+    }
+
+    .info-section h2 {
+      color: #000;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .info-section p {
+      font-size: 1.05em;
+      color: #444;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin: 30px 0;
+    }
+
+    .social-links a {
+      font-size: 1.7em;
+      color: #111;
+      transition: 0.3s;
+    }
+
+    .social-links a:hover {
+      color: #888;
+      transform: scale(1.15);
+    }
+
+    .buttons {
+      text-align: center;
+      margin-top: 50px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .buttons a {
+      background: #111;
+      color: #fff;
+      padding: 14px 28px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: 0.3s;
+    }
+
+    .buttons a:hover {
+      background: #444;
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    footer {
+      background: #000;
+      color: #bbb;
+      text-align: center;
+      padding: 20px 10px;
+      font-size: 0.9em;
+      letter-spacing: 0.3px;
+    }
+
+    @media (max-width: 850px) {
+      .team-section {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .team-card {
+        width: 90%;
+        margin: 0 auto;
+      }
+
+      header h1 {
+        font-size: 1.8em;
+      }
+
+      .buttons a {
+        font-size: 1.1em;
+        width: 85%;
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 50px 15px 40px;
+      }
+
+      header h1 {
+        font-size: 1.6em;
+      }
+
+      .team-card img {
+        width: 100px;
+        height: 100px;
+      }
+
+      .social-links a {
+        font-size: 1.5em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Contact Us</h1>
+    <p>We’re here to help — from orders to refunds, we’ve got you covered!</p>
+  </header>
+
+  <div class="container">
+    <div class="team-section">
+      <div class="team-card">
+        <img src="assets\owner3.jpeg" alt="Owner" />
+        <h3>Chandan Kr. Gupta</h3>
+        <p><strong>Founder & Owner</strong></p>
+        <p>Guiding innovation and ensuring customer happiness every day.</p>
+      </div>
+
+      <div class="team-card">
+        <img src="assets\owner.jpeg " alt="CEO" />
+        <h3>Aditya Kr. Gupta</h3>
+        <p><strong>Devolper & Tech Expert</strong></p>
+        <p>Leading our team toward growth and excellence worldwide.</p>
+      </div>
+    </div>
+
+    <div class="info-section">
+      <h2>📍 Our Office</h2>
+      <p>WhiteArc Pvt. Ltd., Tower 5, Cyber City, Gurugram, Haryana, India</p>
+
+      <div class="social-links">
+        <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+        <a href="mailto:support@whitearc.in"><i class="fa-solid fa-envelope"></i></a>
+      </div>
+    </div>
+
+    <div class="buttons">
+      <a href="Contact.html"><i class="fa-solid fa-headset"></i> Support / Help</a>
+      <a href="tel:+919470094043"><i class="fa-solid fa-phone"></i> Contact Us</a>
+    </div>
+  </div>
+
+  <footer>
+    © 2025 WhiteArc Pvt. Ltd. | All Rights Reserved.
+  </footer>
+</body>
+</html>
+

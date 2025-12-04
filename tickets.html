@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+<meta name="theme-color" content="#0d6efd">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Support Tickets</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0;font-family:'Poppins',sans-serif;}
+    body{background:#f4f4f9;min-height:100vh;padding:20px;}
+    h2{text-align:center;margin-bottom:20px;color:#222;}
+    table{width:100%;border-collapse:collapse;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 5px 15px rgba(0,0,0,0.1);}
+    th,td{padding:12px 10px;text-align:left;border-bottom:1px solid #eee;font-size:14px;}
+    th{background:#007bff;color:#fff;}
+    tr:hover{background:#f9f9ff;}
+    .empty{text-align:center;padding:30px;color:#666;background:#fff;border-radius:10px;box-shadow:0 3px 12px rgba(0,0,0,0.05);}
+    .status{padding:4px 10px;border-radius:6px;font-weight:600;color:#fff;font-size:13px;}
+    .Pending{background:#ff9800;}
+    .Resolved{background:#4caf50;}
+    .btn-back{display:inline-block;margin-top:20px;background:#007bff;color:#fff;padding:10px 15px;border-radius:8px;text-decoration:none;}
+  </style>
+</head>
+<body>
+  <h2>My Support Tickets</h2>
+
+  <div id="ticketContainer"></div>
+
+  <div style="text-align:center;">
+    <a href="Contact.html" class="btn-back">⬅ Back to Contact Page</a>
+  </div>
+
+  <script>
+    const container = document.getElementById("ticketContainer");
+    const tickets = JSON.parse(localStorage.getItem("tickets") || "[]");
+
+    if (tickets.length === 0) {
+      container.innerHTML = '<div class="empty">No tickets found yet.</div>';
+    } else {
+      let html = `
+        <table>
+          <tr>
+            <th>Ticket ID</th>
+            <th>Issue</th>
+            <th>Sub Issue</th>
+            <th>Message</th>
+            <th>Date</th>
+            <th>Status</th>
+          </tr>
+      `;
+      tickets.reverse().forEach(t => {
+        html += `
+          <tr>
+            <td>#${t.ticket_id}</td>
+            <td>${t.issue}</td>
+            <td>${t.sub_issue || '-'}</td>
+            <td>${t.message}</td>
+            <td>${t.date}</td>
+            <td><span class="status ${t.status}">${t.status}</span></td>
+          </tr>
+        `;
+      });
+      html += "</table>";
+      container.innerHTML = html;
+    }
+  </script>
+</body>
+</html>
+
+
