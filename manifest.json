@@ -1,8 +1,7 @@
 {
   "name": "Bazaarseliya",
   "short_name": "Bazaarseliya",
-  "start_url": "/",
-  "scope":"/",
+  "start_url": "/index.html",                 
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#ffffff",
@@ -21,6 +20,7 @@
     }
   ]
 }
+
 
 
 
