@@ -511,11 +511,83 @@
                 left: 0;
             }
         }
+        .pwa-popup {
+  position: fixed;
+  left: 0; right: 0; bottom: 20px;
+  display: flex;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.hidden { display: none; }
+
+.pwa-card {
+  width: 320px;
+  padding: 20px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  text-align: center;
+  animation: slideUp 0.35s ease;
+}
+
+.app-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  margin-bottom: 12px;
+}
+
+.btn-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 18px;
+}
+
+.btn {
+  padding: 10px 18px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.primary {
+  background: #007bff;
+  color: white;
+}
+
+.secondary {
+  background: #e4e4e4;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
     </style>
 
 </head>
 
 <body>
+    <div id="pwa-install-popup" class="pwa-popup hidden">
+  <div class="pwa-card">
+    <img src="icon.png" class="app-icon" />
+
+    <div class="content">
+      <h2>Install Our App</h2>
+      <p>Fast, secure & add to your home screen for full-screen experience.</p>
+    </div>
+
+    <div class="btn-row">
+      <button id="dismissBtn" class="btn secondary">Not Now</button>
+      <button id="installBtn" class="btn primary">Install</button>
+    </div>
+  </div>
+</div>
+
     <div class="announcement-bar">
         <div class="announcement-message active red1">⚡ Free Shipping on Orders Above ₹999!</div>
         <div class="announcement-message">🔥 Flat 50% Off on Winter Collection!</div>
@@ -826,7 +898,37 @@ document.getElementById("installBtn").onclick = async () => {
     }
 };
 </script>
+<script>
+    let deferredPrompt;
 
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+
+  document.getElementById("pwa-install-popup").classList.remove("hidden");
+});
+
+document.getElementById("installBtn").addEventListener("click", async () => {
+  if (!deferredPrompt) return;
+  
+  deferredPrompt.prompt();
+  const { outcome } = await deferredPrompt.userChoice;
+
+  if (outcome === "accepted") {
+    console.log("PWA Installed");
+  } else {
+    console.log("Install dismissed");
+  }
+
+  deferredPrompt = null;
+  document.getElementById("pwa-install-popup").classList.add("hidden");
+});
+
+document.getElementById("dismissBtn").addEventListener("click", () => {
+  document.getElementById("pwa-install-popup").classList.add("hidden");
+});
+
+</script>
 <style>
 @keyframes fadeIn {
   from {opacity: 0; transform: translate(-50%, 20px);}
@@ -846,6 +948,7 @@ document.getElementById("installBtn").onclick = async () => {
 
 
 </html>
+
 
 
 
