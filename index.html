@@ -620,6 +620,21 @@
             <div id="searchResults"></div>
         </div>
     </div>
+    <div id="installPopup" style="
+    display:none;
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:#fff;
+    padding:15px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.3);
+    z-index:9999;">
+    <p>App install करें बेहतर अनुभव के लिए!</p>
+    <button id="installBtn">Install</button>
+    <button id="closePopup">Close</button>
+</div>
+
     <!-- Products Section -->
    
         <h2 class="section-title"><span>Summer Exclusives</span></h2>
@@ -773,6 +788,44 @@ if ('serviceWorker' in navigator) {
   });
 }
 </script>
+<script>
+let popupCount = 0;
+let maxPopups = 3;
+
+function showInstallPopup() {
+    if (popupCount < maxPopups) {
+        document.getElementById("installPopup").style.display = "block";
+        popupCount++;
+    }
+}
+
+// हर 1 मिनट में popup दिखाएँ
+setInterval(() => {
+    showInstallPopup();
+}, 60000);
+
+// Close button event
+document.getElementById("closePopup").onclick = () => {
+    document.getElementById("installPopup").style.display = "none";
+};
+
+// PWA Install Event
+let deferredPrompt;
+
+window.addEventListener("beforeinstallprompt", (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+});
+
+document.getElementById("installBtn").onclick = async () => {
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const result = await deferredPrompt.userChoice;
+        deferredPrompt = null;
+        document.getElementById("installPopup").style.display = "none";
+    }
+};
+</script>
 
 <style>
 @keyframes fadeIn {
@@ -793,6 +846,7 @@ if ('serviceWorker' in navigator) {
 
 
 </html>
+
 
 
 
