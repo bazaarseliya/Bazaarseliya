@@ -7,7 +7,7 @@
   "orientation": "portrait",
   "background_color": "#ffffff",
   "theme_color": "#000000",
-  "description": "Bzaarseliya- Your online shopping marketplace"
+  "description": "Bzaarseliya- Your online shopping marketplace",
   "icons": [
     {
       "src": "/assets/icons/icon-192.png",
@@ -21,6 +21,7 @@
     }
   ]
 }
+
 
 
 
